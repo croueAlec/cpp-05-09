@@ -6,14 +6,14 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/05/30 11:12:54 by acroue           ###   ########.fr        #
+#    Updated: 2024/06/28 17:10:57 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
 #	Program name
-NAME = CHANGE_ME
+NAME = Bureaucrat
 
 #	Colors
 DEFAULT    = \033[0m
@@ -44,6 +44,7 @@ INCLUDES := $(INCS_DIR) \
 INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 
 SRC := \
+	Bureaucrat.cpp \
 	main.cpp
 
 OBJ := $(patsubst %.cpp,$(OBJS_DIR)/%.o,$(SRC))
