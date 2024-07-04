@@ -1,6 +1,11 @@
 #pragma once
+
+#include "Bureaucrat.hpp"
+
 #include <iostream>
 #include <string>
+
+class Bureaucrat;
 
 class Form {
   private:
@@ -9,12 +14,15 @@ class Form {
 	const size_t gradeToSign;
 	const size_t gradeToExecute;
   public:
-	
+
 	Form();
+	Form(const std::string name, int sign, int exectute);
 	Form(const Form& other);
 	~Form();
 	Form& operator=(const Form& other);
 
+	const std::string getName();
+	bool getSign();
 	size_t getGradeToSign() const;
 	size_t getGradeToExecute() const;
 
@@ -27,4 +35,6 @@ class Form {
 	  public:
 		virtual const char* what() const throw();
 	};
+
+	void beSigned(const Bureaucrat& bureaucrat);
 };

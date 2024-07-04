@@ -1,6 +1,5 @@
 #include "Bureaucrat.hpp"
 
-// Constructors
 Bureaucrat::Bureaucrat() : name("default")
 {
 	grade = 0;
@@ -74,6 +73,21 @@ const char * Bureaucrat::GradeTooHighException::what() const throw()
 const char * Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return "The Bureaucrat can't have a grade below 150";
+}
+
+void Bureaucrat::signForm(Form& form) {
+	try {
+		form.beSigned(*this);
+	}
+	catch(Form::GradeTooLowException& e) {
+		std::cerr << name << " couldn't sign " << form.getName() << " because Bureaucrat's grade was too low" << std::endl;
+		return;
+	}
+	catch(std::logic_error& e) {
+		std::cerr << name << " couldn't sign " << form.getName() << " because form was already signed" << std::endl;
+		return;
+	}
+	std::cerr << name << " signed " << form.getName() << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& ostream, const Bureaucrat& bureaucrat) {
