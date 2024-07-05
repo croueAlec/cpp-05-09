@@ -1,0 +1,10 @@
+# Executable
+Bureaucrat
+# Dependecies
+*.d
+# Obj files
+objs/
+*.o
+.vscode
+
+*_shrubbery
