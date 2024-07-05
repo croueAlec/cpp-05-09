@@ -2,6 +2,7 @@
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 #include <cstdlib>
 
@@ -53,12 +54,52 @@ void robot() {
 	}
 }
 
+void pardon() {
+	{
+		Bureaucrat signeur("Signeur", 25);
+		Bureaucrat executeur("Executeur", 5);
+
+		PresidentialPardonForm pardonForm("Henri");
+
+		pardonForm.beSigned(signeur);
+		try
+		{
+			std::cout << std::endl;
+			pardonForm.beSigned(executeur);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+
+		try
+		{
+			std::cout << std::endl;
+			pardonForm.execute(signeur);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+
+		std::cout << std::endl;
+		pardonForm.execute(executeur);
+		std::cout << std::endl;
+		pardonForm.execute(executeur);
+		std::cout << std::endl;
+	}
+}
+
 int main(void)
 {
 
 	// trees();
 
-	robot();
+	// robot();
+
+	// pardon();
+
+	//TODO: tests for executeForm
 
 	return 0;
 }

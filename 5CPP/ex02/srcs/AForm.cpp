@@ -39,7 +39,7 @@ AForm& AForm::operator=(const AForm& other) {
 	return *this;
 }
 
-const std::string AForm::getName() {
+const std::string AForm::getName() const {
 	return name;
 }
 
@@ -82,7 +82,7 @@ std::ostream& operator<<(std::ostream& ostream, const AForm& form) {
 
 void AForm::beSigned(const Bureaucrat& bureaucrat) {
 	if (sign)
-		throw std::logic_error("AForm already signed");
+		throw std::logic_error("Form already signed");
 	else if (bureaucrat.getGrade() > gradeToSign)
 		throw GradeTooLowException();
 	else
