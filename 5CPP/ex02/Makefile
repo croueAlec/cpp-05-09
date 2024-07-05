@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/07/05 13:56:07 by acroue           ###   ########.fr        #
+#    Updated: 2024/07/05 15:29:08 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC := \
 	Bureaucrat.cpp \
 	AForm.cpp \
 	main.cpp \
+	RobotomyRequestForm.cpp \
 	ShrubberyCreationForm.cpp
 
 OBJ := $(patsubst %.cpp,$(OBJS_DIR)/%.o,$(SRC))
