@@ -17,21 +17,21 @@ int main(void)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 
 	try
 	{
 		Form badForm("Bad Form", 0, 8);
-		std::cout << std::endl;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 
 	try
 	{
 		Form otherBadForm("Other Bad Form", 8, 151);
-		std::cout << std::endl;
 	}
 	catch(const std::exception& e)
 	{
