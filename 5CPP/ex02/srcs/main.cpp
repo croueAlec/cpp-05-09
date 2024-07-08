@@ -15,6 +15,7 @@ void trees() {
 		tree.beSigned(signeur);
 		try
 		{
+			std::cout << "ici" << std::endl;
 			tree.execute(signeur);
 		}
 		catch(const std::exception& e)
@@ -90,16 +91,60 @@ void pardon() {
 	}
 }
 
-int main(void)
-{
+void executeFormTest() {
+	{
+		Bureaucrat signeur("Signeur", 17);
+		Bureaucrat executeur("Executeur", 1);
 
-	// trees();
+		ShrubberyCreationForm tree("executed");
+		RobotomyRequestForm bot("mr_r0bo7");
+		PresidentialPardonForm president("Henri");
 
-	// robot();
+		tree.beSigned(signeur);
+		try
+		{
+			std::cout << std::endl;
+			signeur.executeForm(tree);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 
-	// pardon();
+		try
+		{
+			std::cout << std::endl;
+			executeur.executeForm(bot);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 
-	//TODO: tests for executeForm
+		president.beSigned(executeur);
+		try
+		{
+			std::cout << std::endl;
+			executeur.executeForm(president);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+		std::cout << std::endl;
+	}
+}
+
+int main(void) {
+
+	std::cout << "Shrubbery" << std::endl;
+	trees();
+	std::cout << "Robot" << std::endl;
+	robot();
+	std::cout << "Pardon" << std::endl;
+	pardon();
+	std::cout << "Exec Form" << std::endl;
+	executeFormTest();
 
 	return 0;
 }

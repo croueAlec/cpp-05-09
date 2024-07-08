@@ -1,14 +1,15 @@
 #include "AForm.hpp"
 
 AForm::AForm() : name("default"), gradeToSign(5), gradeToExecute(5) {
+	sign = 0;
 	std::cout << "Default constructor for the AForm class called" << std::endl;
 }
 
-AForm::AForm(const std::string name, int sign, int execute) : name(name), gradeToSign(sign), gradeToExecute(execute) {
-	if (sign < 1) {
+AForm::AForm(const std::string name, int gradeSign, int execute) : name(name), gradeToSign(gradeSign), gradeToExecute(execute) {
+	if (gradeSign < 1) {
 		throw GradeTooHighException();
 	}
-	if (sign > 150) {
+	if (gradeSign > 150) {
 		throw GradeTooLowException();
 	}
 
@@ -18,7 +19,7 @@ AForm::AForm(const std::string name, int sign, int execute) : name(name), gradeT
 	if (execute > 150) {
 		throw GradeTooLowException();
 	}
-
+	sign = 0;
 	std::cout << "Default constructor for the AForm class called" << std::endl;
 }
 
