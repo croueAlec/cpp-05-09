@@ -6,14 +6,14 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/07/08 18:01:39 by acroue           ###   ########.fr        #
+#    Updated: 2024/07/11 14:17:59 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
 #	Program name
-NAME = ScalarConverter
+NAME = convert
 
 #	Colors
 DEFAULT    = \033[0m

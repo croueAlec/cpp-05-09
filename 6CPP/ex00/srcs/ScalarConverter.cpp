@@ -21,68 +21,124 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) {
 	return *this;
 }
 
-void	convertToChar(std::string& literal) {
-	if (literal.size() == 1 && isprint(literal[0])) {
-		std::cout << literal[0] << std::endl;
+void	convertToChar(const std::string& literal) {
+	std::cout << "char: " << std::flush;
+
+	char *end = NULL;
+	double value = strtod(literal.c_str(), &end);
+	std::string tmp(end);
+
+	if (literal == "nan" || (!tmp.empty() && tmp != "f") || (value < -128 || value > 127)) {
+		std::cout << "impossible" << std::endl;
 		return;
 	}
 
-	char *end;
-	char ch = static_cast<char>(strtol(literal.c_str(), &end, 10));
-	if (end != '\0')
+	char char_value = static_cast<char>(value);
+
+	if (!isprint(char_value)) {
+		std::cout << "Non displayable" << std::endl;
 		return;
-	std::cout << ch << std::endl;
+	}
+
+	std::cout << "\'" << char_value << "\'" << std::endl;
+	return;
 }
 
-// bool	checkFloat(std::string& literal) {
-// 	int status = 0;
+void	convertToInt(const std::string& literal) {
+	std::cout << "int: " << std::flush;
 
-// 	for (size_t i = 0; i < literal.size(); i++)
-// 	{
-// 		std::cout << &literal[i] << std::endl;
-// 		if (status == 0) {
-// 			if (isdigit(literal[i]))
-// 				continue;
-// 			else
-// 				status = 1;
-// 		}
-// 		if (status == 1) {
-// 			// std::cout << literal[i] << "ici" << std::endl;
-// 			if (literal[i] == '.')
-// 				status = 2;
-// 			else
-// 				return (0);
-// 		}
-// 		else if (status == 2) {
-// 			if (isdigit(literal[i]))
-// 				continue;
-// 			else if (literal[i] == )
-// 				status = 3;
-// 		}
-// 		if (status == 4) {
-// 			if (literal[i] == 'f')
-// 				status = 5;
-// 			else
-// 				return (0);
-// 		}
-// 	}
-// 	return (status == 5);
-// }
+	char *end = NULL;
+	double value = strtod(literal.c_str(), &end);
+	std::string tmp(end);
 
-void	convertToFloat(std::string& literal) {
-	// if (checkFloat(literal)) {
-	// 	std::cout << literal << std::endl;
-	// }
-	char *end;
-	float f = strtof(literal.c_str(), &end);
-	std::cout << f << std::endl;
+	if ((literal == "nan" || (!tmp.empty() && tmp != "f")) || (value < MIN_INT || value > MAX_INT)) {
+		std::cout << "impossible" << std::endl;
+		return;
+	}
+
+	int int_value = static_cast<int>(value);
+
+	std::cout << int_value << std::endl;
+	return;
 }
 
-void	ScalarConverter::convert(std::string& literal) {
+void	convertToFloat(const std::string& literal) {
+	std::cout << "float: " << std::flush;
+
+	char *end = NULL;
+	double value = strtod(literal.c_str(), &end);
+	std::string tmp(end);
+
+	if (literal == "nan") {
+		std::cout << "nanf" << std::endl;
+		return;
+	}
+
+	if ((!tmp.empty() && tmp != "f")) {
+		std::cout << "impossible" << std::endl;
+		return;
+	}
+
+	std::cout << value << std::flush;
+	if (value == floor(value))
+		std::cout << ".0" << std::flush;
+	std::cout << "f" << std::endl;
+	return;
+}
+
+void	convertToDouble(const std::string& literal) {
+	std::cout << "double: " << std::flush;
+
+	char *end = NULL;
+	double value = strtod(literal.c_str(), &end);
+	std::string tmp(end);
+
+	if (literal == "nan") {
+		std::cout << "nan" << std::endl;
+		return;
+	}
+
+	if ((!tmp.empty() && tmp != "f")) {
+		std::cout << "impossible" << std::endl;
+		return;
+	}
+
+	std::cout << value << std::flush;
+	if (value == floor(value))
+		std::cout << ".0" << std::flush;
+	std::cout << std::endl;
+	return;
+}
+
+bool	handleInf(const std::string& literal) {
+	if (literal == "-inf" || literal == "+inf" || literal == "+inff" || literal == "-inff") {
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		if (literal[0] == '-') {
+			std::cout << "float: -inff" << std::endl;
+			std::cout << "double: -inf" << std::endl;
+		} else {
+			std::cout << "float: +inff" << std::endl;
+			std::cout << "double: +inf" << std::endl;
+		}
+		return 1;
+	}
+
+	return 0;
+}
+
+void	ScalarConverter::convert(const std::string& literal) {
 	if (literal.size() == 0) {
 		std::cerr << "Invalid literal" << std::endl;
 		return;
 	}
+
+	if (handleInf(literal)) {
+		return;
+	}
+
 	convertToChar(literal);
+	convertToInt(literal);
 	convertToFloat(literal);
+	convertToDouble(literal);
 }
