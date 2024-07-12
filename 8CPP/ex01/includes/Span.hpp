@@ -33,8 +33,6 @@ class Span {
 	std::vector<int>::iterator end();
 
 	Span(std::vector<int>::iterator begin, std::vector<int>::iterator end, size_t size);
-	// #include <deque>
-	// template <typename T, template container = deque<T> >
 };
 
 std::ostream& operator<<(std::ostream& os, Span& span);
