@@ -6,14 +6,14 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/05/30 11:12:54 by acroue           ###   ########.fr        #
+#    Updated: 2024/07/12 16:51:05 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
 #	Program name
-NAME = CHANGE_ME
+NAME = easyfind
 
 #	Colors
 DEFAULT    = \033[0m
