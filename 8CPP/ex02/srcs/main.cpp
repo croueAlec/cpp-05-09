@@ -50,9 +50,32 @@ void listExample() {
 	}
 }
 
+void otherTests() {
+	MutantStack<size_t> mstack;
+
+	std::cout << "For each element divisible by 3 in the stack I remove the last element" << std::endl;
+	for (size_t i = 0; i < 15; i++)
+	{
+		mstack.push(mstack.size() * 7);
+	}
+	std::cout << mstack << std::endl;
+
+	for (MutantStack<size_t>::iterator it = mstack.begin(); it != mstack.end(); it++)
+	{
+		if (*it % 3 == 0 && *it != 0) {
+			std::cout << *it << " is divisible by 3" << std::endl;
+			std::cout << "Removing " << *(mstack.end() - 1) << " from mstack" << std::endl;
+			mstack.pop();
+		}
+	}
+	std::cout << mstack << std::endl;
+}
+
 int main(void) {
 	std::cout << "Subject example:" << std::endl;
 	subjectExample();
 	std::cout << "\nList example:" << std::endl;
 	listExample();
+	std::cout << "\nOther examples:" << std::endl;
+	otherTests();
 }

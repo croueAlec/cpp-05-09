@@ -2,6 +2,7 @@
 
 #include <deque>
 #include <stack>
+#include <iostream>
 
 template <typename T, typename container = std::deque<T> >
 class MutantStack : public std::stack<T, container> {
@@ -29,3 +30,12 @@ class MutantStack : public std::stack<T, container> {
 		return this->c.end();
 	}
 };
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, MutantStack<T>& mstack) {
+	for (std::size_t i = 0; i < mstack.size(); i++)
+	{
+		os << *(mstack.begin() + i) << " ";
+	}
+	return os;
+}
