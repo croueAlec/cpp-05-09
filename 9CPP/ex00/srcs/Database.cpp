@@ -104,7 +104,14 @@ std::map<std::string, double>& Database::getDB() {
 
 void Database::printValue(const std::string key, double wallet) {
 	std::map<std::string, double>::iterator it = this->database.lower_bound(key);
-	// std::cout << wallet << " " << (*it).second << std::endl;
-	double mult = (*it).second * wallet;
-	std::cout << key << " => " << wallet << " = " << mult << std::endl;
+	if (this->database.find(key) == this->database.end()) {
+		if (it != this->database.begin())
+			it--;
+		double mult = (*it).second * wallet;
+		std::cout << key << " => " << wallet << " = " << mult << std::endl;
+	} else {
+		it = this->database.find(key);
+		double mult = (*it).second * wallet;
+		std::cout << key << " => " << wallet << " = " << mult << std::endl;
+	}
 }

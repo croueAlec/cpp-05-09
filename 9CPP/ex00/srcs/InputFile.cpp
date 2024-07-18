@@ -22,7 +22,7 @@ InputFile& InputFile::operator=(const InputFile& other) {
 }
 
 void InputFile::checkInput(std::string line, double& wallet) {
-	if (line.size() < 14 || !Database::checkDate(line))
+	if (line.size() < 14 || !Database::checkDate(line) || line.substr(0, 10) == "2009-01-01")
 		throw BadDateException();
 
 	if (line.substr(10, 3) != " | ")
