@@ -36,7 +36,7 @@ void checkSyntax(std::string& operation) {
 		}
 	}
 
-	if (numbers < 2 && numbers - 1 != sign)
+	if (numbers < 2 || numbers - 1 != sign)
 		throw InvalidOperationException();
 }
 
