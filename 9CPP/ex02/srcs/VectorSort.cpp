@@ -69,3 +69,15 @@ bool VectorSort::isUnpair(std::pair<int, int>& value) {
 
 	return value.first == unpaired;
 }
+
+void VectorSort::setBegin() {
+	begin = time(0);
+}
+
+void VectorSort::setEnd() {
+	end = time(0);
+}
+
+std::time_t VectorSort::getTotTime() {
+	return end - begin;
+}

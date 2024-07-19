@@ -1,20 +1,28 @@
 #include <vector>
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 
 class VectorSort : public std::vector<std::pair<int, int> > {
   private:
 	int unpaired;
 	bool odd;
+	std::time_t begin;
+	std::time_t end;
   public:
 	VectorSort();
 	VectorSort(const char *argv[]);
 	VectorSort(const VectorSort& other);
 	~VectorSort();
 	VectorSort& operator=(const VectorSort& other);
+
 	bool isUnpair(int value);
 	bool isUnpair(std::vector<std::pair<int, int> >::iterator& value);
 	bool isUnpair(std::pair<int, int>& value);
+
+	void setBegin();
+	void setEnd();
+	std::time_t getTotTime();
 };
 
 inline std::ostream& operator<<(std::ostream& os, VectorSort& tmp) {
