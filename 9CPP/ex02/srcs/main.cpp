@@ -42,6 +42,19 @@ void isListValid(char const *argv[]) {
 	}
 }
 
+void displayDefault(const char *argv[]) {
+	std::cout << "before:  " << std::flush;
+	for (size_t i = 1; argv[i]; i++)
+	{
+		std::cout << argv[i] << " " << std::flush;
+	}
+	std::cout << std::endl;
+}
+
+void displayTime(int size, VectorSort& vec) {
+	std::cout << "Time to process a range of " << size << " elements with std::vector : " << vec.getTotTime() << " TimeUnit(s)" << std::endl;
+}
+
 int main(int argc, char const *argv[]) {
 	if (argc == 1) {
 		std::cerr << "Error : Invalid argument count" << std::endl;
@@ -58,11 +71,12 @@ int main(int argc, char const *argv[]) {
 		return 1;
 	}
 
-	std::cout << "all good" << std::endl;
+	displayDefault(argv);
 
 	VectorSort vec(argv);
 
 	std::cout << vec << std::endl;
+	displayTime(argc - 1, vec);
 
 	return 0;
 }
