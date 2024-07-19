@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 
+#include "VectorSort.hpp"
+
 class InvalidInputException : public std::exception {
   public:
 	virtual const char* what() const throw();
@@ -17,26 +19,15 @@ const char* DuplicateException::what() const throw() {
 	return "Error : duplicates";
 }
 
-std::ostream& operator<<(std::ostream& os, std::vector<int> vec) {
-	for (size_t i = 0; i < vec.size(); i++)
-	{
-		std::cout << vec[i] << " " << std::flush;
-	}
-	std::cout << std::endl;
-	return os;
-}
-
 void isListValid(char const *argv[]) {
 	std::vector<int> tmp;
 	double value = 0;
 
 	for (size_t i = 1; argv[i]; i++)
 	{
-		for (size_t j = 0; argv[i][j]; j++)
-		{
-			if (!isdigit(argv[i][j]))
-				throw InvalidInputException();
-		}
+		std::string str(argv[i]);
+		if (str.find_first_not_of("0123456789") != str.npos)
+			throw InvalidInputException();
 		value = strtod(argv[i], 0);
 		if (value > 2147483647 || value < -2147483648)
 			throw InvalidInputException();
@@ -45,7 +36,7 @@ void isListValid(char const *argv[]) {
 	std::sort(tmp.begin(), tmp.end());
 	for (std::vector<int>::iterator it = tmp.begin(); it + 1 != tmp.end(); it++)
 	{
-		std::cout << *it << " " << *(it + 1) << std::endl;
+		// std::cout << *it << " " << *(it + 1) << std::endl;
 		if (*it == *(it + 1))
 			throw DuplicateException();
 	}
@@ -68,6 +59,10 @@ int main(int argc, char const *argv[]) {
 	}
 
 	std::cout << "all good" << std::endl;
+
+	VectorSort vec(argv);
+
+	std::cout << vec << std::endl;
 
 	return 0;
 }
