@@ -3,7 +3,7 @@
 execute_rpn() {
 	echo ""
 	echo "$1"
-	./RPN "$1"
+	valgrind -q ./RPN "$1"
 }
 
 make cre
