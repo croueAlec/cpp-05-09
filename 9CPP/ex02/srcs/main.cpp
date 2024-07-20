@@ -55,28 +55,71 @@ void displayTime(int size, VectorSort& vec) {
 	std::cout << "Time to process a range of " << size << " elements with std::vector : " << vec.getTotTime() << " TimeUnit(s)" << std::endl;
 }
 
+// std::vector<size_t> jacobstyle(size_t j) {
+// 	std::vector<size_t> jacob;
+// 	jacob.push_back(2);
+// 	jacob.push_back(2);
+// 	for (size_t i = 1; i < j; i++)
+// 	{
+// 		size_t val = jacob[i] + (jacob[i - 1] * 2);
+// 		jacob.push_back(val);
+// 	}
+// 	return jacob;
+// }
+
+// std::vector<std::pair<int, int> > jacobsort(std::vector<std::pair<int, int> >& tmp) {
+// 	std::vector<size_t> jacobSequence = jacobstyle(tmp.size());
+// 	std::vector<std::pair<int, int> > result;
+
+// 	std::cout << "jacob " << jacobSequence << std::endl;
+// 	std::cout << tmp << std::endl;
+// 	for (size_t i = 0; tmp.size(); i++)
+// 	{
+// 		std::cout << "Making group of size " << jacobSequence[i] << std::endl;
+// 		for (size_t j = std::min(jacobSequence[i], tmp.size()); j > 0; j--)
+// 		{
+// 			std::cout << tmp.at(j - 1).first << " " << j << std::endl;
+// 			result.push_back(tmp.at(j - 1));
+// 			tmp.erase(tmp.begin() + j - 1);
+// 		}
+// 	}
+// 	return result;
+// }
+
+// void testJacob() {
+// 	std::vector<std::pair<int, int> > truc;
+// 	for (size_t i = 0; i < 21; i++)
+// 	{
+// 		truc.push_back(std::make_pair(i*3, i*3));
+// 	}
+// 	std::vector<std::pair<int, int> > patate = jacobsort(truc);
+// 	std::cout << patate << std::endl;
+// }
+
+
 int main(int argc, char const *argv[]) {
 	if (argc == 1) {
 		std::cerr << "Error : Invalid argument count" << std::endl;
 		return 1;
 	}
 
-	try
-	{
-		isListValid(argv);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		return 1;
-	}
+	// try
+	// {
+	// 	isListValid(argv);
+	// }
+	// catch(const std::exception& e)
+	// {
+	// 	std::cerr << e.what() << '\n';
+	// 	return 1;
+	// }
 
-	displayDefault(argv);
+	// displayDefault(argv);
 
-	VectorSort vec(argv);
+	// VectorSort vec(argv);
 
-	std::cout << vec << std::endl;
-	displayTime(argc - 1, vec);
+	// std::cout << vec << std::endl;
+	// displayTime(argc - 1, vec);
 
+	(void)argv;
 	return 0;
 }

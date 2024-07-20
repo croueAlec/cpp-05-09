@@ -63,6 +63,16 @@ VectorSort::VectorSort(const char *argv[]) : unpaired(0), odd(false) {
 
 	*this = mergeSort(*this);
 
+	std::vector<int> sorted;
+	sorted.reserve((this->size() * 2) + 1);
+	sorted.push_back(this->at(0).first);
+	sorted.push_back(this->at(0).second);
+	this->erase(this->begin());
+	addBiggerOfPair(sorted);
+
+	*this = jacobsort();
+	
+
 	setEnd();
 }
 
@@ -90,17 +100,17 @@ bool VectorSort::isUnpair(std::pair<int, int>& value) {
 void VectorSort::setBegin() {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
-	begin = tv.tv_usec;
+	begin_time = tv.tv_usec;
 }
 
 void VectorSort::setEnd() {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
-	end = tv.tv_usec;
+	end_time = tv.tv_usec;
 }
 
 std::time_t VectorSort::getTotTime() {
-	return end - begin;
+	return end_time - begin_time;
 }
 
 std::vector<std::pair<int, int> > VectorSort::mergeSort(std::vector<std::pair<int, int> > split) {
@@ -130,4 +140,46 @@ void VectorSort::sortPairs() {
 			std::swap(this->at(i).first, this->at(i).second);
 		}
 	}
+}
+
+void VectorSort::addBiggerOfPair(std::vector<int>& sorted) {
+	for (size_t i = 0; i < this->size(); i++)
+	{
+		sorted.push_back(this->at(i).second);
+	}
+}
+
+std::vector<size_t> VectorSort::jacobstyle(size_t j) {
+	std::vector<size_t> jacob;
+	jacob.push_back(2);
+	jacob.push_back(2);
+	for (size_t i = 1; i < j; i++)
+	{
+		size_t val = jacob[i] + (jacob[i - 1] * 2);
+		jacob.push_back(val);
+	}
+	return jacob;
+}
+
+std::vector<std::pair<int, int> > VectorSort::jacobsort() {
+	std::vector<size_t> jacobSequence = jacobstyle(this->size());
+	std::vector<std::pair<int, int> > result;
+
+	std::cout << "jacob " << jacobSequence << std::endl;
+	std::cout << this << std::endl;
+	for (size_t i = 0; this->size(); i++)
+	{
+		std::cout << "Making group of size " << jacobSequence[i] << std::endl;
+		for (size_t j = std::min(jacobSequence[i], this->size()); j > 0; j--)
+		{
+			std::cout << this->at(j - 1).first << " " << j << std::endl;
+			result.push_back(this->at(j - 1));
+			this->erase(this->begin() + j - 1);
+		}
+	}
+	return result;
+}
+
+std::vector<int> VectorSort::insert(std::vector<int>& final) {
+
 }

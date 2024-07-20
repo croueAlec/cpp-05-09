@@ -9,8 +9,8 @@ class VectorSort : public std::vector<std::pair<int, int> > {
   private:
 	int unpaired;
 	bool odd;
-	std::time_t begin;
-	std::time_t end;
+	std::time_t begin_time;
+	std::time_t end_time;
   public:
 	VectorSort();
 	VectorSort(const char *argv[]);
@@ -29,6 +29,13 @@ class VectorSort : public std::vector<std::pair<int, int> > {
 
 	std::vector<std::pair<int, int> > mergeSort(std::vector<std::pair<int, int> > split);
 	void sortPairs();
+
+	void addBiggerOfPair(std::vector<int>& sorted);
+
+	std::vector<size_t> jacobstyle(size_t j);
+	std::vector<std::pair<int, int> > jacobsort();
+
+	std::vector<int> insert(std::vector<int>& final);
 };
 
 inline std::vector<std::pair<int, int> > operator+(std::vector<std::pair<int, int> >& low, std::vector<std::pair<int, int> >& high) {
@@ -69,7 +76,8 @@ inline std::ostream& operator<<(std::ostream& os, VectorSort& tmp) {
 	return os;
 }
 
-inline std::ostream& operator<<(std::ostream& os, std::vector<int>& vec) {
+template<typename T>
+inline std::ostream& operator<<(std::ostream& os, std::vector<T>& vec) {
 	for (size_t i = 0; i < vec.size(); i++)
 	{
 		std::cout << vec[i] << " " << std::flush;
