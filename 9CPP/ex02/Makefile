@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/07/19 12:53:55 by acroue           ###   ########.fr        #
+#    Updated: 2024/07/21 17:02:29 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ INCLUDES := $(INCS_DIR) \
 INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 
 SRC := \
+	DequeSort.cpp \
 	main.cpp \
 	VectorSort.cpp
 

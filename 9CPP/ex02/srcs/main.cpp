@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "VectorSort.hpp"
+#include "DequeSort.hpp"
 
 class InvalidInputException : public std::exception {
   public:
@@ -53,6 +54,10 @@ void displayDefault(const char *argv[]) {
 
 void displayTime(int size, VectorSort& vec) {
 	std::cout << "Time to process a range of " << size << " elements with std::vector : " << vec.getTotTime() << " TimeUnit(s)" << std::endl;
+}
+
+void displayTime(int size, DequeSort& deq) {
+	std::cout << "Time to process a range of " << size << " elements with std::vector : " << deq.getTotTime() << " TimeUnit(s)" << std::endl;
 }
 
 // std::vector<size_t> jacobstyle(size_t j) {
@@ -118,9 +123,12 @@ int main(int argc, char const *argv[]) {
 		displayDefault(argv);
 
 		VectorSort vec(argv);
+		DequeSort deq(argv);
 
-		// std::cout << vec << std::endl;
+		VectorSort::isSorted(vec.getSorted());
+		DequeSort::isSorted(deq.getSorted());
 		displayTime(argc - 1, vec);
+		displayTime(argc - 1, deq);
 
 		(void)argv;
 	}

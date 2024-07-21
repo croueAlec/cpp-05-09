@@ -12,6 +12,7 @@ class VectorSort : public std::vector<std::pair<int, int> > {
 	std::time_t begin_time;
 	std::time_t end_time;
 	std::pair<int, int> oddPair;
+	std::vector<int> sortedResult;
   public:
 	VectorSort();
 	VectorSort(const char *argv[]);
@@ -40,7 +41,8 @@ class VectorSort : public std::vector<std::pair<int, int> > {
 	std::vector<int> insert(std::vector<int>& final);
 	size_t findValIndex(std::vector<int>& final, int value);
 
-	void isSorted(std::vector<int>& final);
+	static void isSorted(std::vector<int>& final);
+	std::vector<int>& getSorted();
 };
 
 inline std::vector<std::pair<int, int> > operator+(std::vector<std::pair<int, int> >& low, std::vector<std::pair<int, int> >& high) {
