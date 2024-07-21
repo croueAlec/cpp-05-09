@@ -98,28 +98,35 @@ void displayTime(int size, VectorSort& vec) {
 
 
 int main(int argc, char const *argv[]) {
-	if (argc == 1) {
-		std::cerr << "Error : Invalid argument count" << std::endl;
-		return 1;
+	try
+	{
+		if (argc == 1) {
+			std::cerr << "Error : Invalid argument count" << std::endl;
+			return 1;
+		}
+
+		try
+		{
+			isListValid(argv);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+			return 1;
+		}
+
+		displayDefault(argv);
+
+		VectorSort vec(argv);
+
+		std::cout << vec << std::endl;
+		displayTime(argc - 1, vec);
+
+		(void)argv;
 	}
-
-	// try
-	// {
-	// 	isListValid(argv);
-	// }
-	// catch(const std::exception& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// 	return 1;
-	// }
-
-	// displayDefault(argv);
-
-	// VectorSort vec(argv);
-
-	// std::cout << vec << std::endl;
-	// displayTime(argc - 1, vec);
-
-	(void)argv;
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << " something went wrong, exiting\n";
+	}
 	return 0;
 }

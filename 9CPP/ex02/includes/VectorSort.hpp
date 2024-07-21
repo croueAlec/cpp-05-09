@@ -35,7 +35,9 @@ class VectorSort : public std::vector<std::pair<int, int> > {
 	std::vector<size_t> jacobstyle(size_t j);
 	std::vector<std::pair<int, int> > jacobsort();
 
+	void binaryInsert(std::vector<int>& final, int value, size_t start, size_t end, size_t middle);
 	std::vector<int> insert(std::vector<int>& final);
+	size_t findValIndex(std::vector<int>& final, int value);
 };
 
 inline std::vector<std::pair<int, int> > operator+(std::vector<std::pair<int, int> >& low, std::vector<std::pair<int, int> >& high) {

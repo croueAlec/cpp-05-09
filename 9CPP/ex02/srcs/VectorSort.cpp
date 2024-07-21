@@ -71,9 +71,11 @@ VectorSort::VectorSort(const char *argv[]) : unpaired(0), odd(false) {
 	addBiggerOfPair(sorted);
 
 	*this = jacobsort();
-	
+
+	insert(sorted);
 
 	setEnd();
+	std::cout << sorted << std::endl;
 }
 
 bool VectorSort::isUnpair(int value) {
@@ -166,13 +168,13 @@ std::vector<std::pair<int, int> > VectorSort::jacobsort() {
 	std::vector<std::pair<int, int> > result;
 
 	std::cout << "jacob " << jacobSequence << std::endl;
-	std::cout << this << std::endl;
+	std::cout << "*this " << *this << std::endl;
 	for (size_t i = 0; this->size(); i++)
 	{
 		std::cout << "Making group of size " << jacobSequence[i] << std::endl;
 		for (size_t j = std::min(jacobSequence[i], this->size()); j > 0; j--)
 		{
-			std::cout << this->at(j - 1).first << " " << j << std::endl;
+			std::cout << this->at(j - 1).first << "j>" << j << std::endl;
 			result.push_back(this->at(j - 1));
 			this->erase(this->begin() + j - 1);
 		}
@@ -180,6 +182,51 @@ std::vector<std::pair<int, int> > VectorSort::jacobsort() {
 	return result;
 }
 
-std::vector<int> VectorSort::insert(std::vector<int>& final) {
+void VectorSort::binaryInsert(std::vector<int>& final, int value, size_t start, size_t end, size_t middle) {
+	std::cout << "v b e m" << std::endl;
+	while (true)
+	{
+		std::cout << value << " " << start << " " << end << " " << middle << std::endl;
+		if (final.at(middle) < value && (middle == final.size() - 1 || final.at(middle + 1) > value)) { 
+			break;
+		} else if (final.at(middle) > value) {
+			end = middle;
+			middle = end / 2;
+		} else if (final.at(middle) < value) {
+			start = middle;
+			middle = (end - start) / 2;
+		}
+	}
+	final.insert(final.begin() + middle + 1, value);
+}
 
+std::vector<int> VectorSort::insert(std::vector<int>& final) {
+	while (this->size())
+	{
+		std::cout << "final " << final << std::endl;
+		int value = this->at(0).first;
+		size_t start = 0;
+		size_t end = findValIndex(final, this->at(0).second);
+		size_t middle = end / 2;
+		binaryInsert(final, value, start, end, middle);
+		this->erase(this->begin());
+	}
+	return final;
+}
+
+size_t VectorSort::findValIndex(std::vector<int>& final, int value) {
+	if (final.size() > this->size()) {
+		for (size_t i = final.size() - 1; i > 0; i--)
+		{
+			if (final.at(i) == value)
+				return i;
+		}
+	} else {
+		for (size_t i = 0; i < final.size(); i++)
+		{
+			if (final.at(i) == value)
+				return i;
+		}
+	}
+	return 0;
 }
