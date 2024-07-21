@@ -39,6 +39,8 @@ class VectorSort : public std::vector<std::pair<int, int> > {
 	void binaryInsert(std::vector<int>& final, int value, size_t start, size_t end, size_t middle);
 	std::vector<int> insert(std::vector<int>& final);
 	size_t findValIndex(std::vector<int>& final, int value);
+
+	void isSorted(std::vector<int>& final);
 };
 
 inline std::vector<std::pair<int, int> > operator+(std::vector<std::pair<int, int> >& low, std::vector<std::pair<int, int> >& high) {
@@ -74,7 +76,6 @@ inline std::ostream& operator<<(std::ostream& os, VectorSort& tmp) {
 		}
 		std::cout << tmp[i].first << "_" << tmp[i].second << " " << std::flush;
 	}
-	std::cout << std::endl;
 
 	return os;
 }

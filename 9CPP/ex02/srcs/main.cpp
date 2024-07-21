@@ -119,7 +119,7 @@ int main(int argc, char const *argv[]) {
 
 		VectorSort vec(argv);
 
-		std::cout << vec << std::endl;
+		// std::cout << vec << std::endl;
 		displayTime(argc - 1, vec);
 
 		(void)argv;
