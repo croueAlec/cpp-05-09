@@ -19,6 +19,7 @@ VectorSort& VectorSort::operator=(const VectorSort& other) {
 	if (this != &other) {
 		this->odd = other.odd;
 		this->unpaired = other.unpaired;
+		this->oddPair = other.oddPair;
 		for (size_t i = 0; i < other.size(); i++)
 		{
 			this->push_back(other[i]);
@@ -43,12 +44,11 @@ VectorSort::VectorSort(const char *argv[]) : unpaired(0), odd(false) {
 	}
 
 	setBegin();
-	std::pair<int, int> oddPair;
 
 	if (tmpVec.size() % 2 == 1) {
 		odd = true;
 		unpaired = tmpVec.back();
-		oddPair = std::make_pair(tmpVec.back(), tmpVec.back());
+		this->oddPair = std::make_pair(tmpVec.back(), tmpVec.back());
 		tmpVec.pop_back();
 	}
 
@@ -211,6 +211,7 @@ std::vector<int> VectorSort::insert(std::vector<int>& final) {
 		binaryInsert(final, value, start, end, middle);
 		this->erase(this->begin());
 	}
+	// binaryInsert(final, this->oddPair.first, 0, final.size(), final.size() / 2);
 	return final;
 }
 

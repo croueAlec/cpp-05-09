@@ -11,6 +11,7 @@ class VectorSort : public std::vector<std::pair<int, int> > {
 	bool odd;
 	std::time_t begin_time;
 	std::time_t end_time;
+	std::pair<int, int> oddPair;
   public:
 	VectorSort();
 	VectorSort(const char *argv[]);
