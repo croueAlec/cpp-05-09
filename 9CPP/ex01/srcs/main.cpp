@@ -21,6 +21,9 @@ void checkSyntax(std::string& operation) {
 	size_t numbers = 0;
 	size_t sign = 0;
 
+	if (operation.size() % 2 == 0)
+		throw InvalidOperationException();
+
 	for (size_t i = 0; i < operation.size(); i++)
 	{
 		if (i % 2 && operation[i] != ' ') {
@@ -57,6 +60,8 @@ int doMath(std::stack<int>& stack, char sign) {
 		return second_nbr * first_nbr;
 
 	  case '/':
+		if (first_nbr == 0)
+			throw std::logic_error("Error: can't divide by 0");
 		return second_nbr / first_nbr;
 	}
 
@@ -95,7 +100,14 @@ int main(int argc, char const *argv[])
 		return 1;
 	}
 
-	rpn(operation);
+	try
+	{
+		rpn(operation);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
 	return 0;
 }
